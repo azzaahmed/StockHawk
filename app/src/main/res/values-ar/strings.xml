@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">اسهم هوك</string>
+    <string name="dialog_title">اضافة سهم</string>
+    <string name="dialog_hint">رمز (e.g. GOOG)</string>
+    <string name="dialog_cancel">الغاء</string>
+    <string name="dialog_add">اضافة</string>
+
+    <string name="error_no_network">لا يوجد اتصال بالشبكة سيتم تحميل مؤشر الأسهم عندما تكون الشبكة متاحة.
+</string>
+    <string name="error_no_stocks">لم يتم إضافة أي أسهم!  اضغت الزر لإضافة واحد.
+</string>
+
+    <string name="toast_stock_added_no_connectivity">تمت إضافة الرمز %S سيتم التحديث عندما تصبح الشبكة المتاحة.
+</string>
+    <string name="toast_no_connectivity">سيتم التحديث عندما تصبح الشبكة المتاحة.
+</string>
+    <string name="graphRange">رسم بياني من %1$s الي %2$s</string>
+    <string name="toast_non_existent_stock">سهم غير موجود  يرجي ادخال سهم صحيح</string>
+    <string name="title_activity_details">تاريخ السهم</string>
+    <string name="action_settings">الاعدادات</string>
+    <string name="addStock" >اضافة سهم جديد</string>
+
+    <string name="empty_stock_list">لا يوجد معلومات متاحة</string>
+
+    <string name="title_widget_detail">تفاصيل الاسهم</string>
+</resources>

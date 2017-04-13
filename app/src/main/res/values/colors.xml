@@ -8,4 +8,10 @@
     <color name="material_red_700">#D50000</color>
     <color name="material_green_700">#00C853</color>
 
+    <color name="white">#FFFFFF</color>
+    <color name="grey">#cccccc</color>
+    <color name="grey_700">#646464</color>
+    <color name="grey_800">#424242</color>
+
+    <color name="black">#000000</color>
 </resources>

@@ -1,10 +1,12 @@
 package com.udacity.stockhawk.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -43,10 +45,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @BindView(R.id.error)
     TextView error;
     private StockAdapter adapter;
-
+    FloatingActionButton fab ;
     @Override
-    public void onClick(String symbol) {
+    public void onClick(String symbol,String history) {
+        // history mab3thaly mn adapter aly wa5dha mn sync
         Timber.d("Symbol clicked: %s", symbol);
+
+        /// intent to details graph
+        if(history!=null) {
+            Intent intent = new Intent(this, DetailsActivity.class);
+            intent.putExtra("history", history);
+            startActivity(intent);
+        }
+
     }
 
     @Override
@@ -55,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        fab= (FloatingActionButton)findViewById(R.id.fab);
+        fab.setContentDescription(getString(R.string.addStock));
 
         adapter = new StockAdapter(this, this);
         stockRecyclerView.setAdapter(adapter);
@@ -147,8 +160,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             error.setVisibility(View.GONE);
         }
         adapter.setCursor(data);
+        if (QuoteSyncJob.NonExistentStock) {
+            Toast.makeText(this, R.string.toast_non_existent_stock, Toast.LENGTH_LONG).show();
+            QuoteSyncJob.NonExistentStock=false;
+        }
     }
-
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {

@@ -33,13 +33,22 @@ class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
         this.context = context;
         this.clickHandler = clickHandler;
 
-        dollarFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.US);
-        dollarFormatWithPlus = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.US);
+       // Locale myLocale = new Locale("ar_EG");
+
+        dollarFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.getDefault());
+        dollarFormatWithPlus = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.getDefault());
+
+        //inorder to remove the currency symbol and make it dollar
         dollarFormatWithPlus.setPositivePrefix("+$");
+        dollarFormatWithPlus.setNegativePrefix("-$");
+        dollarFormat.setNegativePrefix("$");
+        dollarFormat.setPositivePrefix("$");
+
         percentageFormat = (DecimalFormat) NumberFormat.getPercentInstance(Locale.getDefault());
         percentageFormat.setMaximumFractionDigits(2);
         percentageFormat.setMinimumFractionDigits(2);
         percentageFormat.setPositivePrefix("+");
+
     }
 
     void setCursor(Cursor cursor) {
@@ -78,6 +87,7 @@ class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
             holder.change.setBackgroundResource(R.drawable.percent_change_pill_green);
         } else {
             holder.change.setBackgroundResource(R.drawable.percent_change_pill_red);
+
         }
 
         String change = dollarFormatWithPlus.format(rawAbsoluteChange);
@@ -104,7 +114,8 @@ class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
 
 
     interface StockAdapterOnClickHandler {
-        void onClick(String symbol);
+        //hena barag3 lel main al symbol
+        void onClick(String symbol,String history);
     }
 
     class StockViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -129,7 +140,9 @@ class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
             int adapterPosition = getAdapterPosition();
             cursor.moveToPosition(adapterPosition);
             int symbolColumn = cursor.getColumnIndex(Contract.Quote.COLUMN_SYMBOL);
-            clickHandler.onClick(cursor.getString(symbolColumn));
+            int historyColumn = cursor.getColumnIndex( Contract.Quote.COLUMN_HISTORY);
+            // ba3at al history zyada
+            clickHandler.onClick(cursor.getString(symbolColumn),cursor.getString(historyColumn));
 
         }
 

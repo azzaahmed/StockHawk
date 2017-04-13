@@ -67,6 +67,7 @@ public class AddStockDialog extends DialogFragment {
 
     private void addStock() {
         Activity parent = getActivity();
+        //feh addStock fel main bab3atlaha al symbol (al esm)
         if (parent instanceof MainActivity) {
             ((MainActivity) parent).addStock(stock.getText().toString());
         }
